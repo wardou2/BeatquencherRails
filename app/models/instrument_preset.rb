@@ -1,0 +1,2 @@
+class InstrumentPreset < ApplicationRecord
+end
