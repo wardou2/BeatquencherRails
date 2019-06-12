@@ -35,7 +35,7 @@ class Api::V1::ProjectsController < ApplicationController
   private
 
   def project_params
-   params.permit(:title)
+   params.permit(:title, :tempo, :scenes, :instruments, :users)
   end
 
   def find_project

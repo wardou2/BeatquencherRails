@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :find_user, only: [:show, :update]
+  before_action :find_user, only: [:show, :update, :destroy]
+  before_action :set_token, only: [:findUser]
 
   def show
     render json: @user
@@ -19,10 +20,21 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    render json: @user
+  end
+
+  def findUser
+    @user = User.find_by(email: params["email"])
+    @user.google_token = @token
+    render json: @user
+  end
+
   private
 
   def user_params
-    params.permit(:username)
+    params.permit(:name, :email, :google_token, :google_refresh_token)
   end
 
   def find_user
