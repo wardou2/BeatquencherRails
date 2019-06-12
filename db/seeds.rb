@@ -91,6 +91,7 @@ bassDrumP = InstrumentPreset.create(
 cymbalP = InstrumentPreset.create(
   'ins_type': "metalsynth",
   'options': {
+    'volume': -4,
     'frequency': 800,
     'envelope': {
       'attack': 0.001,
@@ -107,7 +108,7 @@ cymbalP = InstrumentPreset.create(
 snareP = InstrumentPreset.create(
   'ins_type': "noisesynth",
   'options': {
-    'volume': -12,
+    'volume': -4,
 		'noise': {
 			'type': 'pink',
 			'playbackRate': 3,
@@ -131,6 +132,6 @@ snare = Instrument.create(ins_type: snareP.ins_type, options: snareP.options, pr
 # mono1scene1 = Track.create(instrument: mono1, scene: sceneA, notes:[0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0])
 # poly1scene2 = Track.create(instrument: poly1, scene: sceneB, notes:[nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil])
 # mono1scene2 = Track.create(instrument: mono1, scene: sceneB, notes:[nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil])
-bDscene2 = Track.create(instrument: bassDrum, scene: sceneB, notes:["C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil])
-cymbalscene2 = Track.create(instrument: cymbal, scene: sceneB, notes:["C4", "C4", "C4", "C4", "C4", "C4", "C4", "C4","C4", "C4", "C4", "C4", "C4", "C4", "C4", "C4"])
-snarescene2 = Track.create(instrument: snare, scene: sceneB, notes:[ nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2", nil, "C2"])
+bDscene2 = Track.create(instrument: bassDrum, scene: sceneB, notes:["C1", nil, nil, nil, nil, nil, nil, "C1", "C2", nil, "C1", nil, nil, nil, "C1", nil])
+cymbalscene2 = Track.create(instrument: cymbal, scene: sceneB, notes:["C4", nil, "C4", nil, "C4", nil, "C4", nil, "C4", nil, "C4", nil, "C4", nil, "C4", nil])
+snarescene2 = Track.create(instrument: snare, scene: sceneB, notes:[ nil, nil, nil, nil, "C2", nil, nil, nil, nil, nil, nil, nil, "C2", nil, nil, nil])
