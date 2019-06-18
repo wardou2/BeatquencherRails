@@ -10,22 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_07_153633) do
+ActiveRecord::Schema.define(version: 2019_06_14_203222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "instrument_presets", force: :cascade do |t|
     t.string "ins_type"
+    t.string "name"
     t.jsonb "options"
+    t.jsonb "effects", default: [], array: true
   end
 
   create_table "instruments", force: :cascade do |t|
     t.bigint "project_id"
     t.string "ins_type"
+    t.string "name"
     t.jsonb "options"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "effects", default: [], array: true
     t.index ["project_id"], name: "index_instruments_on_project_id"
   end
 
@@ -49,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_153633) do
     t.bigint "instrument_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "notes", default: [], array: true
+    t.string "notes", default: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""], array: true
     t.index ["instrument_id"], name: "index_tracks_on_instrument_id"
     t.index ["scene_id"], name: "index_tracks_on_scene_id"
   end

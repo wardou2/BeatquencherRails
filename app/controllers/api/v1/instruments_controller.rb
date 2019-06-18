@@ -1,5 +1,6 @@
 class Api::V1::InstrumentsController < ApplicationController
   before_action :find_instrument, only: [:show, :update]
+  before_action :is_authorized
 
   def show
     render json: @instrument
@@ -7,14 +8,10 @@ class Api::V1::InstrumentsController < ApplicationController
 
   def create
     @instrument = Instrument.new(instrument_params)
-    def create
-      @instrument = Instrument.find_or_create_by!(instrument_params)
-      puts "@instrument:", @instrument
-      if @instrument.valid?
-        render json: { instrument: UserSerializer.new(@instrument) }, status: :created
-      else
-        render json: { error: 'failed to create instrument' }, status: :not_acceptable
-      end
+    if @instrument.save
+      render json: { instrument: UserSerializer.new(@instrument) }, status: :created
+    else
+      render json: { error: 'failed to create instrument' }, status: :not_acceptable
     end
   end
 
@@ -24,6 +21,7 @@ class Api::V1::InstrumentsController < ApplicationController
   end
 
   def update
+    puts instrument_params
     @instrument.update(instrument_params)
     if @instrument.save
      render json: @instrument, status: :accepted
@@ -35,7 +33,7 @@ class Api::V1::InstrumentsController < ApplicationController
   private
 
   def instrument_params
-    params.permit(:ins_type, :options)
+    params.require(:instrument).permit(:ins_type, :name, :options => {}, :effects => [:eff_type, :eff_options => {}])
   end
 
   def find_instrument

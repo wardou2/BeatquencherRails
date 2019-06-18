@@ -1,5 +1,6 @@
 class Api::V1::ScenesController < ApplicationController
   before_action :find_scene, only: [:show, :update]
+  before_action :is_authorized
 
   def show
     render json: @scene
@@ -8,6 +9,22 @@ class Api::V1::ScenesController < ApplicationController
   def index
     @scenes = Scene.all
     render json: @scenes
+  end
+
+  def create
+    @project = Project.find(scene_params['project_id'])
+    @scene = Scene.new(name: scene_params['name'], project: @project)
+    if @scene.save
+      instruments = @project.instruments
+      tracks = []
+      instruments.each do |ins|
+        tracks << Track.create(instrument_id: ins.id, scene_id: @scene.id)
+      end
+
+      render json: @scene, status: :created
+    else
+      render json: { error: 'failed to create instrument' }, status: :not_acceptable
+    end
   end
 
   def update
@@ -22,7 +39,7 @@ class Api::V1::ScenesController < ApplicationController
   private
 
   def scene_params
-    params.permit(:title)
+    params.require(:scene).permit(:name, :project_id)
   end
 
   def find_scene

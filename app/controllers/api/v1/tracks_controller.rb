@@ -1,5 +1,6 @@
 class Api::V1::TracksController < ApplicationController
   before_action :find_track, only: [:show, :update]
+  before_action :is_authorized
 
   def show
     render json: @track
@@ -10,6 +11,30 @@ class Api::V1::TracksController < ApplicationController
     render json: @tracks
   end
 
+  def new
+    @track = Track.new(track_params)
+    if @track.save
+      render json: { instrument: UserSerializer.new(@instrument) }, status: :created
+    else
+      render json: { error: 'failed to create instrument' }, status: :not_acceptable
+    end
+  end
+
+  def multiple_track_new
+    instrument_presets = InstrumentPreset.all
+
+    multiple_track_params['scene_count'].each do |x|
+      scene = Scene.create(project_id: multiple_track_params['project_id'], name: `Scene #{x}`)
+      instrument_presets.each do |insP|
+        instrument = Instrument.create(ins_type: insP.type, name: insP.name, options: insP.options, effects: insP.effects)
+
+
+
+      end
+    end
+
+  end
+
   def getTracks
     tracks = Track.all.select{ |t| t.instrument_id === params["instrument_id"] && t.scene_id === params["scene_id"]}
     render json: tracks
@@ -17,6 +42,7 @@ class Api::V1::TracksController < ApplicationController
 
   def update
     @track.update(track_params)
+
     if @track.save
       render json: @track, status: :accepted
     else
@@ -27,7 +53,11 @@ class Api::V1::TracksController < ApplicationController
   private
 
   def track_params
-    params.permit(:notes)
+    params.require(:track).permit(:scene_id, :instrument_id, :notes => [])
+  end
+
+  def multiple_track_params
+    params.permit(:project_id, :scene_count, :notes => [])
   end
 
   def find_track

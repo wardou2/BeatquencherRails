@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :find_user, only: [:show, :update, :destroy]
-  before_action :set_token, only: [:findUser]
+  before_action :is_authorized
 
   def show
     render json: @user

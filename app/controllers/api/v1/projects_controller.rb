@@ -1,20 +1,21 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :update]
+  before_action :is_authorized
 
   def show
     render json: @project
   end
 
   def create
-    @project = Project.new(project_params)
-    def create
-      @project = Project.find_or_create_by!(project_params)
-      puts "@project:", @project
-      if @project.valid?
-        render json: { project: ProjectSerializer.new(@project) }, status: :created
-      else
-        render json: { error: 'failed to create project' }, status: :not_acceptable
-      end
+    @project = Project.new(title: project_params['title'], tempo: project_params['tempo'])
+
+    if @project.save
+      @user = User.find(project_params['user_id'])
+      @project.user_projects.create(user_id: @user.id)
+
+      render json: @project, status: :accepted
+    else
+      render json: { error: 'failed to create project' }, status: :not_acceptable
     end
   end
 
@@ -35,7 +36,7 @@ class Api::V1::ProjectsController < ApplicationController
   private
 
   def project_params
-   params.permit(:title, :tempo, :scenes, :instruments, :users)
+   params.require(:project).permit(:title, :tempo, :scenes, :instruments, :users, :user_id)
   end
 
   def find_project
