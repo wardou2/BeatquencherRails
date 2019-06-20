@@ -62,6 +62,9 @@ polyP = InstrumentPreset.create(
       'harmonicity': 0.5,
       'modulationType': "sine"
     },
+    'filter': {
+      'Q': 6
+    },
     'envelope': {
       'attackCurve': "exponential",
       'attack': 0.05,

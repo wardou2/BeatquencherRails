@@ -1,5 +1,5 @@
 class Api::V1::TracksController < ApplicationController
-  before_action :find_track, only: [:show, :update]
+  before_action :find_track, only: [:show, :update, :destroy]
   before_action :is_authorized
 
   def show
@@ -48,6 +48,11 @@ class Api::V1::TracksController < ApplicationController
     else
       render json: { errors: @track.errors.full_messages }, status: :unprocessible_entity
     end
+  end
+
+  def destroy
+    @track.destroy()
+    render json: @track
   end
 
   private

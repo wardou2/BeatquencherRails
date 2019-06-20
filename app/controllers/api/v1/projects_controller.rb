@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_action :find_project, only: [:show, :update]
+  before_action :find_project, only: [:show, :update, :destroy]
   before_action :is_authorized, except: [:index]
 
   def show
@@ -31,6 +31,11 @@ class Api::V1::ProjectsController < ApplicationController
     else
      render json: { errors: @project.errors.full_messages }, status: :unprocessible_entity
     end
+  end
+
+  def destroy
+    @project.destroy()
+    render json: @project
   end
 
   private

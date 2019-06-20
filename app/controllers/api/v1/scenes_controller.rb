@@ -1,5 +1,5 @@
 class Api::V1::ScenesController < ApplicationController
-  before_action :find_scene, only: [:show, :update]
+  before_action :find_scene, only: [:show, :update, :destroy]
   before_action :is_authorized
 
   def show
@@ -34,6 +34,11 @@ class Api::V1::ScenesController < ApplicationController
     else
      render json: { errors: @scene.errors.full_messages }, status: :unprocessible_entity
     end
+  end
+
+  def destroy
+    @scene.destroy()
+    render json: @scene
   end
 
   private

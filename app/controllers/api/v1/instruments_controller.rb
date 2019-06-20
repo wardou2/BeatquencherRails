@@ -1,5 +1,5 @@
 class Api::V1::InstrumentsController < ApplicationController
-  before_action :find_instrument, only: [:show, :update]
+  before_action :find_instrument, only: [:show, :update, :destroy]
   before_action :is_authorized, except: [:index]
 
   def show
@@ -28,6 +28,11 @@ class Api::V1::InstrumentsController < ApplicationController
     else
      render json: { errors: @instrument.errors.full_messages }, status: :unprocessible_entity
     end
+  end
+
+  def destroy
+    @instrument.destroy()
+    render json: @instrument
   end
 
   private
