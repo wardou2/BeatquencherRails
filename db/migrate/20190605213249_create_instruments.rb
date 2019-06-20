@@ -4,6 +4,7 @@ class CreateInstruments < ActiveRecord::Migration[5.2]
       t.belongs_to :project, index: true, foreign_key: true
       t.string :ins_type
       t.string :name
+      t.boolean :melodic
       t.jsonb :options
 
       t.timestamps

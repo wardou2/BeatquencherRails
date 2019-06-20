@@ -1,6 +1,6 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :update]
-  before_action :is_authorized
+  before_action :is_authorized, except: [:index]
 
   def show
     render json: @project

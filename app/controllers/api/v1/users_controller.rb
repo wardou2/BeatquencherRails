@@ -34,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :email, :google_token, :google_refresh_token)
+    params.permit(:name, :email)
   end
 
   def find_user

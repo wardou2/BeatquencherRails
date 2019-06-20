@@ -57,11 +57,13 @@ class ApplicationController < ActionController::API
     instrumentPs << InstrumentPreset.find_by(ins_type: 'open_hihat')
     instrumentPs << InstrumentPreset.find_by(ins_type: 'closed_hihat')
     instrumentPs << InstrumentPreset.find_by(ins_type: 'snare')
+    instrumentPs << InstrumentPreset.find_by(ins_type: 'monosynth')
+    instrumentPs << InstrumentPreset.find_by(ins_type: 'polysynth')
 
     instruments = []
 
     instrumentPs.each do |insP|
-      instruments << Instrument.create(ins_type: insP.ins_type, name: insP.name, options: insP.options, effects: insP.effects, project: @project)
+      instruments << Instrument.create(ins_type: insP.ins_type, name: insP.name, melodic:insP.melodic, options: insP.options, effects: insP.effects, project: @project)
     end
 
     scene_array = []

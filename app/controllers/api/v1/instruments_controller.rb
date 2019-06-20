@@ -1,6 +1,6 @@
 class Api::V1::InstrumentsController < ApplicationController
   before_action :find_instrument, only: [:show, :update]
-  before_action :is_authorized
+  before_action :is_authorized, except: [:index]
 
   def show
     render json: @instrument

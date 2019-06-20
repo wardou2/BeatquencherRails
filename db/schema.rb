@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_203222) do
     t.string "ins_type"
     t.string "name"
     t.jsonb "options"
+    t.boolean "melodic"
     t.jsonb "effects", default: [], array: true
   end
 
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(version: 2019_06_14_203222) do
     t.bigint "project_id"
     t.string "ins_type"
     t.string "name"
+    t.boolean "melodic"
     t.jsonb "options"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

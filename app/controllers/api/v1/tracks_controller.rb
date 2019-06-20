@@ -20,20 +20,20 @@ class Api::V1::TracksController < ApplicationController
     end
   end
 
-  def multiple_track_new
-    instrument_presets = InstrumentPreset.all
-
-    multiple_track_params['scene_count'].each do |x|
-      scene = Scene.create(project_id: multiple_track_params['project_id'], name: `Scene #{x}`)
-      instrument_presets.each do |insP|
-        instrument = Instrument.create(ins_type: insP.type, name: insP.name, options: insP.options, effects: insP.effects)
-
-
-
-      end
-    end
-
-  end
+  # def multiple_track_new
+  #   instrument_presets = InstrumentPreset.all
+  #
+  #   multiple_track_params['scene_count'].each do |x|
+  #     scene = Scene.create(project_id: multiple_track_params['project_id'], name: `Scene #{x}`)
+  #     instrument_presets.each do |insP|
+  #       instrument = Instrument.create(ins_type: insP.type, name: insP.name, options: insP.options, effects: insP.effects)
+  #
+  #
+  #
+  #     end
+  #   end
+  #
+  # end
 
   def getTracks
     tracks = Track.all.select{ |t| t.instrument_id === params["instrument_id"] && t.scene_id === params["scene_id"]}
