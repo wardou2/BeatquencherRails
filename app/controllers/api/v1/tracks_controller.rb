@@ -1,6 +1,6 @@
 class Api::V1::TracksController < ApplicationController
   before_action :find_track, only: [:show, :update, :destroy]
-  before_action :is_authorized
+  before_action :is_authorized, except: [:show, :index]
 
   def show
     render json: @track
