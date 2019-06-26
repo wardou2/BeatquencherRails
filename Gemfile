@@ -46,7 +46,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'active_model_serializers'
 # gem 'devise'
-gem 'omniauth-google-oauth2'
+# gem 'omniauth-google-oauth2'
 
 gem 'google-id-token'
 
