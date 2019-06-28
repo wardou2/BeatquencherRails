@@ -10,7 +10,7 @@ Authentication is performed with Google's OAuth.
 
 ## Getting Started
 * Clone down this repo & run `bundle install` inside the project folder.
-* If you don't have Postgres running locally, install Postgres.app.
+* If you don't have Postgres running locally, install [Postgres.app](https://postgresapp.com/downloads.html).
 * Run `rails db:setup && rails db:migrate`.
 * Run `rails db:seed`.
 * Run `rails s` to host on your local machine.
