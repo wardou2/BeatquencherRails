@@ -15,7 +15,7 @@ Run rails db:setup && rails db:migrate.
 Run rails db:seed. This is the only time you'll need to have set the env variable for your password.
 Run rails s to host on your local machine.
 Test by going to http://localhost:3000/api/v1/users. You should see this:
-![alt text](https://raw.githubusercontent.com/wardou2/beatquencherRails/tree/master/images/users_api_not_loggedin.png)
+![alt text](https://raw.githubusercontent.com/wardou2/BeatquencherRails/master/images/users_api_not_loggedin.png)
 That's good! We haven't logged in yet so the API doesn't want to give up any information.
 Next you will need to set up the React JS front end: BeatquencherReact. Follow the instructions on the readme for that repo.
 
