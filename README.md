@@ -17,7 +17,7 @@ Authentication is performed with Google's OAuth.
 * Test by going to http://localhost:3000/api/v1/users. You should see this:
 ![API result declaring user not logged in](https://raw.githubusercontent.com/wardou2/BeatquencherRails/master/images/users_api_not_loggedin.png)
 * That's good! We haven't logged in yet so the API doesn't want to give up any information.
-* Next you will need to set up the React JS front end: BeatquencherReact. Follow the instructions on the readme for that repo.
+* Next you will need to set up the React JS front end: [BeatquencherReact](https://github.com/wardou2/BeatquencherReact "Beatquencher React"). Follow the instructions on the readme for that repo.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
