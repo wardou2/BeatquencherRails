@@ -12,10 +12,11 @@ Authentication is performed with Google's OAuth.
 * Clone down this repo & run `bundle install` inside the project folder.
 * If you don't have Postgres running locally, install [Postgres.app](https://postgresapp.com/downloads.html).
 * Run `rails db:setup && rails db:migrate`.
+* Next, run `rails db:seed`.
 * Run `rails s` to host on your local machine.
 * Test by going to http://localhost:3000/api/v1/users. You should see this:
 ![API result declaring user not logged in](https://raw.githubusercontent.com/wardou2/BeatquencherRails/master/images/users_api_not_loggedin.png)
-* That's good! We haven't logged in yet so the API doesn't want to give up any information.
+* That's good! We haven't logged in yet so the API doesn't want to give up any information. 
 * Next you will need to set up the React JS front end: [BeatquencherReact](https://github.com/wardou2/BeatquencherReact "Beatquencher React"). Follow the instructions on the readme for that repo.
 
 ## License
