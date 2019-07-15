@@ -4,9 +4,6 @@ class ApplicationController < ActionController::API
 
   def log_in
 
-    # if is_authorized
-      # @user = User.add_new(name: params["name"], email: params["email"], google_token: @token)
-
       if User.find_by(email: params['email'])
         @user = User.find_by(email: params['email'])
       else
@@ -19,9 +16,6 @@ class ApplicationController < ActionController::API
       else
         render json: { error: 'failed to create user' }, status: :not_acceptable
       end
-    # else
-    #   render json: { error: 'not logged in' }, status: :not_acceptable
-    # end
   end
 
   def is_authorized
