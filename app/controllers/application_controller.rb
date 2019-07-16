@@ -7,10 +7,9 @@ class ApplicationController < ActionController::API
       if User.find_by(email: params['email'])
         @user = User.find_by(email: params['email'])
       else
-        @user = User.find_or_create_by!(name: params["name"], email: params["email"], google_token: @token)
+        @user = User.find_or_create_by!(name: params["name"], email: params["email"])
       end
 
-      puts "@user:", @user
       if @user.valid?
         render json: { user: UserSerializer.new(@user) }, status: :created
       else
@@ -20,7 +19,6 @@ class ApplicationController < ActionController::API
 
   def is_authorized
     set_token
-    puts 'authorizing'
     validator = GoogleIDToken::Validator.new
     required_audience = '510068393267-t5uivuplurovghmip1mrcrpvs2tbi936.apps.googleusercontent.com'
     optional_client_id = '510068393267-t5uivuplurovghmip1mrcrpvs2tbi936.apps.googleusercontent.com'
@@ -28,14 +26,11 @@ class ApplicationController < ActionController::API
     begin
       payload = validator.check(@token, required_audience, optional_client_id)
       if payload
-        puts 'verified'
         return true
       else
-        puts 'not verified'
         render json: { error: 'not logged in' }, status: :not_acceptable
       end
     rescue GoogleIDToken::ValidationError => e
-      puts e
       render json: { error: e }, status: :not_acceptable
     end
   end
@@ -78,7 +73,6 @@ class ApplicationController < ActionController::API
 
   def set_token
     @token = request.headers["HTTP_ID_TOKEN"]
-    puts @token
   end
 
   def project_params
