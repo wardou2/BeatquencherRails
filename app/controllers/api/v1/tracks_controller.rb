@@ -27,9 +27,6 @@ class Api::V1::TracksController < ApplicationController
   #     scene = Scene.create(project_id: multiple_track_params['project_id'], name: `Scene #{x}`)
   #     instrument_presets.each do |insP|
   #       instrument = Instrument.create(ins_type: insP.type, name: insP.name, options: insP.options, effects: insP.effects)
-  #
-  #
-  #
   #     end
   #   end
   #
